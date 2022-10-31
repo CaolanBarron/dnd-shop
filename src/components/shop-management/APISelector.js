@@ -1,6 +1,8 @@
 import React from "react";
 
 
+// A drop down menu that displays from the DND5E API based on
+// the request passed into the props
 class APISelector extends React.Component {
     constructor(props) {
         super(props);
@@ -10,13 +12,19 @@ class APISelector extends React.Component {
         }
 
         this.waitForData = this.waitForData.bind(this);
+
+        this.reRender = this.reRender.bind(this);
     }
 
     async componentDidMount() {
-       const response = await fetch(this.props.url);
-       const json = await response.json();
+       this.forceUpdate();
+    }
 
-       if (json.results){
+    async componentDidUpdate() {
+        const response = await fetch(this.props.url);
+        const json = await response.json();
+
+        if (json.results){
            this.setState(
             {
                 data: json.results,
@@ -25,11 +33,11 @@ class APISelector extends React.Component {
             this.setState({
                 data: json.equipment
             })
+            
         }
     }
 
     waitForData() {
-        console.log(this.state.data)
         if(this.state.data.length === 0) {
             return <option key="loading">Loading</option>
         } else {
@@ -42,9 +50,13 @@ class APISelector extends React.Component {
 
     }
 
+    reRender() {
+            this.forceUpdate();
+    }
+
     render() {
         return(
-            <select>
+            <select onChange={this.props.cb}>
                 {this.waitForData()}
             </select>
         )
