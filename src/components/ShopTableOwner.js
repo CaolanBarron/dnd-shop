@@ -1,5 +1,6 @@
 import React from "react";
 
+//Editable version of the shop for owners
 class ShopTableOwner extends React.Component {
     constructor(props) {
         super(props);

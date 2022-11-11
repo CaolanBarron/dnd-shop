@@ -30,6 +30,9 @@ const tableData = [
 
 ]
 
+//This component checks if the user owns said shop
+// For owners it will display the shop in an editable version
+// For guests it will display the shop in a static version
 class ShopView extends React.Component {
 
     constructor(props) {

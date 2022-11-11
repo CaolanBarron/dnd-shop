@@ -1,5 +1,6 @@
 import React from "react";
 
+//Static version of the shop for guests
 class ShopTableGuest extends React.Component {
     constructor(props) {
         super(props);
